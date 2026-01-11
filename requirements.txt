@@ -3,37 +3,32 @@ fastapi==0.109.2
 uvicorn[standard]==0.27.1
 python-multipart==0.0.9
 
-# Tells pip to look for CPU versions first
---extra-index-url https://download.pytorch.org/whl/cpu
-
-# ML & Vision
-torch
-torchvision
-ultralytics
+# ML & Vision - HEADLESS versions for server deployment
+ultralytics==8.1.24
+opencv-python-headless==4.9.0.80  # Changed from opencv-python
+torch==2.2.0
+torchvision==0.17.0
 
 # LLM & RAG
-openai
-langchain
-langchain-openai
-langchain-core
-langgraph
-tiktoken
-chromadb
+openai==1.12.0
+langchain==0.1.9
+langchain-openai==0.0.6
+langchain-core==0.1.23
+langgraph==0.0.25
 
 # Vector Search
-faiss-cpu
-rank-bm25
+faiss-cpu==1.7.4
+rank-bm25==0.2.2
 
-# PDF & Data
-PyPDF2
-reportlab
-pillow
-pandas
-numpy
+# PDF Generation
+reportlab==4.1.0
+pillow==10.2.0
+
+# Data Processing
+pandas==2.2.0
+numpy==1.26.4
 
 # Utilities
-python-dotenv
-requests
-pydantic
-
-huggingface-hub==0.21.4
+python-dotenv==1.0.1
+requests==2.31.0
+pydantic==2.6.1
