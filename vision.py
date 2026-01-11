@@ -1,17 +1,37 @@
+import os
 from ultralytics import YOLO
+from huggingface_hub import hf_hub_download
 
-def load_model(model_path):
-    return YOLO(model_path)
+# ===============================
+# HF SETUP
+# ===============================
+HF_TOKEN = os.getenv("HF_TOKEN")
+REPO_ID = "intxnk01/tourgether-models"
 
-def detect_attraction(image_path, model):
-    results = model(image_path)
-    probs = results[0].probs
+def download_yolo_model(filename="models/best.pt", local_dir="downloads") -> str:
+    """Download YOLO model from Hugging Face if not present locally."""
+    os.makedirs(local_dir, exist_ok=True)
+    local_path = os.path.join(local_dir, os.path.basename(filename))
+    if not os.path.exists(local_path):
+        print(f"📥 Downloading YOLO model from Hugging Face...")
+        local_path = hf_hub_download(
+            repo_id=REPO_ID,
+            filename=filename,
+            token=HF_TOKEN,
+            cache_dir=local_dir
+        )
+        print(f"✅ YOLO model downloaded to {local_path}")
+    return local_path
 
-    if probs is None:
-        return "no_detection", 0.0
+# ===============================
+# LOAD YOLO
+# ===============================
+YOLO_PATH = download_yolo_model("models/best.pt")
+yolo_model = YOLO(YOLO_PATH)
 
-    cls_id = int(probs.top1)
-    label = model.names[cls_id]
-    confidence = float(probs.top1conf)
-
-    return label, confidence
+# ===============================
+# DETECTION FUNCTION
+# ===============================
+def detect_objects(image_path):
+    results = yolo_model(image_path)
+    return results
