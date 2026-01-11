@@ -1,34 +1,36 @@
 # Web Framework
-fastapi==0.109.2
-uvicorn[standard]==0.27.1
-python-multipart==0.0.9
+fastapi
+uvicorn[standard]
+python-multipart
 
-# ML & Vision (CPU-only, lighter versions)
+# ML & Vision (CPU-only)
 --extra-index-url https://download.pytorch.org/whl/cpu
-torch==2.1.0+cpu
-torchvision==0.16.0+cpu
-ultralytics==8.0.196
-opencv-python-headless==4.8.1.78
+torch
+torchvision
+ultralytics
+opencv-python-headless
 
-# LLM & RAG (core only)
-openai==1.3.0
-langchain==0.1.0
-langchain-openai==0.0.2
-langchain-core==0.1.10
-langgraph==0.0.20
+# LLM & RAG
+openai
+langchain
+langchain-openai
+langchain-community
+langchain-core
+langgraph
+tiktoken
 
 # Vector Search
-faiss-cpu==1.7.4
-rank-bm25==0.2.2
+faiss-cpu
+rank-bm25
 
 # PDF & Data
-reportlab==4.0.7
-pillow==10.1.0
-pandas==2.1.3
-numpy==1.24.3
+reportlab
+pillow
+pandas
+numpy
 
 # Utilities
-python-dotenv==1.0.0
-requests==2.31.0
-pydantic==2.5.0
-huggingface-hub==0.19.4
+python-dotenv
+requests
+pydantic
+huggingface-hub
