@@ -28,7 +28,6 @@ temp_*
 .DS_Store
 Thumbs.db
 
-# Large ML files
-models/*.pt
-faiss_embeddings_region/*.pkl
-faiss_embeddings_region/*.index.env
+# Large ML files - DOWNLOADED FROM HUGGING FACE
+models/
+faiss_embeddings_region/

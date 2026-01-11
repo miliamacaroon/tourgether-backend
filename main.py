@@ -15,7 +15,17 @@ from dotenv import load_dotenv
 import pandas as pd
 from io import BytesIO
 
-# Import your existing modules
+# ===============================
+# DOWNLOAD MODELS FIRST (before importing vision/llm_rag)
+# ===============================
+from download_models import download_all_models
+
+# Download models on first import (runs once per deployment)
+if not os.path.exists("models/best.pt") or not os.path.exists("faiss_embeddings_region"):
+    print("🔄 Models not found locally, downloading from Hugging Face...")
+    download_all_models()
+
+# Import your existing modules AFTER models are downloaded
 from vision import detect_attraction, load_model
 from llm_rag import graph
 from region_mapper import RegionMapper

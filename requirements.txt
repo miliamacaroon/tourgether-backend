@@ -3,13 +3,13 @@ fastapi==0.109.2
 uvicorn[standard]==0.27.1
 python-multipart==0.0.9
 
-# ML & Vision - Use headless version!
+# ML & Vision
 torch
 torchvision
 ultralytics
 opencv-python-headless
 
-# Rest of your requirements...
+# LLM & RAG
 openai
 langchain
 langchain-openai
@@ -18,13 +18,20 @@ langchain-core
 langgraph
 tiktoken
 chromadb
+
+# Vector Search
 faiss-cpu
 rank-bm25
+
+# PDF Generation & Data
 PyPDF2
 reportlab
 pillow
 pandas
 numpy
+
+# Utilities
 python-dotenv
 requests
 pydantic
+huggingface-hub  # <-- ADD THIS
