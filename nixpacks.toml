@@ -1,2 +1,5 @@
 [phases.setup]
-nixPkgs = ["...", "libGL", "glib"]
+nixPkgs = ["python310", "libGL", "glib", "libglib-2.0-0", "gcc"]
+
+[phases.install]
+cmds = ["pip install --upgrade pip", "pip install --no-cache-dir -r requirements.txt"]

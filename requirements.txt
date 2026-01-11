@@ -10,7 +10,7 @@ python-multipart==0.0.9
 torch
 torchvision
 ultralytics
-opencv-python-headless
+opencv-python-headless==4.8.1.78
 
 # LLM & RAG (Floating versions to prevent resolution errors)
 openai
