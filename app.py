@@ -56,9 +56,12 @@ if "auto_destination" not in st.session_state:
 PROJECT_ROOT = "/content/drive/MyDrive/Colab Notebooks/CAIE Project (TourGether)"
 MODEL_PATH = os.path.join(PROJECT_ROOT, "runs/tourgether_region_final/weights/best.pt")
 
-@st.cache_resource
+@st.cache_resource(show_spinner=False)
 def load_vision_model():
-    return load_model(MODEL_PATH)
+    model = load_model(MODEL_PATH)
+    model.to('cpu')  # Explicitly use CPU
+    model.fuse()  # Optimize for inference
+    return model
 
 vision_model = load_vision_model()
 
