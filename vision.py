@@ -1,37 +1,59 @@
 import os
+import logging
 from ultralytics import YOLO
-from huggingface_hub import hf_hub_download
 
-# ===============================
-# HF SETUP
-# ===============================
-HF_TOKEN = os.getenv("HF_TOKEN")
-REPO_ID = "intxnk01/tourgether-models"
+# Set up logging to see what's happening in Railway logs
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-def download_yolo_model(filename="models/best.pt", local_dir="downloads") -> str:
-    """Download YOLO model from Hugging Face if not present locally."""
-    os.makedirs(local_dir, exist_ok=True)
-    local_path = os.path.join(local_dir, os.path.basename(filename))
-    if not os.path.exists(local_path):
-        print(f"📥 Downloading YOLO model from Hugging Face...")
-        local_path = hf_hub_download(
-            repo_id=REPO_ID,
-            filename=filename,
-            token=HF_TOKEN,
-            cache_dir=local_dir
-        )
-        print(f"✅ YOLO model downloaded to {local_path}")
-    return local_path
+# Global variable to hold the loaded model (Singleton pattern)
+_vision_model = None
 
-# ===============================
-# LOAD YOLO
-# ===============================
-YOLO_PATH = download_yolo_model("models/best.pt")
-yolo_model = YOLO(YOLO_PATH)
+def load_model(model_path: str):
+    """
+    Loads the YOLO model into memory. 
+    Using a global variable ensures we don't load it multiple times.
+    """
+    global _vision_model
+    
+    if _vision_model is not None:
+        return _vision_model
 
-# ===============================
-# DETECTION FUNCTION
-# ===============================
-def detect_objects(image_path):
-    results = yolo_model(image_path)
-    return results
+    if not os.path.exists(model_path):
+        logger.error(f"❌ Model file not found at {model_path}")
+        raise FileNotFoundError(f"Model file {model_path} is missing. Check download logs.")
+
+    try:
+        logger.info(f"🔄 Loading YOLO model from {model_path}...")
+        # Use task='detect' to be explicit
+        _vision_model = YOLO(model_path, task='detect')
+        logger.info("✅ Vision model loaded successfully.")
+        return _vision_model
+    except Exception as e:
+        logger.error(f"❌ Failed to load YOLO model: {e}")
+        raise
+
+def detect_attraction(image_path: str, model=None):
+    """
+    Run inference on an image. 
+    Accepts an optional model instance to avoid re-loading.
+    """
+    if model is None:
+        # Fallback if no model is passed, though main.py should provide it
+        model = load_model(os.getenv("MODEL_PATH", "models/best.pt"))
+    
+    try:
+        results = model(image_path)
+        
+        # Extract the top detected class and confidence
+        if len(results) > 0 and len(results[0].boxes) > 0:
+            top_box = results[0].boxes[0]
+            class_id = int(top_box.cls[0])
+            label = model.names[class_id]
+            confidence = float(top_box.conf[0])
+            return label, confidence
+        
+        return "Unknown", 0.0
+    except Exception as e:
+        logger.error(f"Inference error: {e}")
+        return "Error", 0.0
