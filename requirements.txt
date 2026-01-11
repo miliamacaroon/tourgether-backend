@@ -6,7 +6,7 @@ python-multipart==0.0.9
 # Tells pip to look for CPU versions first
 --extra-index-url https://download.pytorch.org/whl/cpu
 
-# ML & Vision (Optimized for fast Railway builds)
+# ML & Vision
 torch
 torchvision
 ultralytics
@@ -35,3 +35,5 @@ numpy
 python-dotenv
 requests
 pydantic
+
+huggingface-hub==0.21.4
