@@ -1,6 +1,6 @@
 # Web Framework
 fastapi
-uvicorn[standard]
+uvicorn==0.27.0
 python-multipart
 
 # ML & Vision (CPU-only)
