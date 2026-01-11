@@ -2,8 +2,10 @@
 nixPkgs = ["python310", "libGL", "glib", "gcc"]
 
 [phases.install]
-cmds = ["python -m pip install -r requirements.txt"]
+# Use --no-cache-dir to save disk space during the build phase
+cmds = ["python -m pip install --upgrade pip", "python -m pip install --no-cache-dir -r requirements.txt"]
 
 [start]
-# Runs download script FIRST, then starts uvicorn
+# 1. Runs the download script (checks Volume for models)
+# 2. Then starts Uvicorn using the module flag to avoid PATH errors
 cmd = "python download_models.py && python -m uvicorn main:app --host 0.0.0.0 --port $PORT --workers 1"
