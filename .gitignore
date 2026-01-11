@@ -31,4 +31,4 @@ Thumbs.db
 # Large ML files
 models/*.pt
 faiss_embeddings_region/*.pkl
-faiss_embeddings_region/*.index
+faiss_embeddings_region/*.index.env
