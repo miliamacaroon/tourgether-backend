@@ -28,7 +28,7 @@ temp_*
 .DS_Store
 Thumbs.db
 
-# Model files (too large - use Railway volumes)
-# models/*.pt
-# faiss_embeddings_region/*.index
-# faiss_embeddings_region/*.pkl
+# Large ML files
+models/*.pt
+faiss_embeddings_region/*.pkl
+faiss_embeddings_region/*.index
