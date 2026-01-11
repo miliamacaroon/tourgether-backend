@@ -3,49 +3,37 @@ fastapi==0.109.2
 uvicorn[standard]==0.27.1
 python-multipart==0.0.9
 
-# ML & Vision
-ultralytics==8.1.24
-torch==2.2.0
-torchvision==0.17.0
-opencv-python-headless==4.9.0.80
+# Tells pip to look for CPU versions first to prevent timeout
+--extra-index-url https://download.pytorch.org/whl/cpu
 
-# LLM & RAG
-openai==1.12.0
-langchain==0.1.9
-langchain-openai==0.0.6
-# removed langchain-core==0.1.23 to avoid conflict
-langgraph==0.0.25
-langchain-community==0.0.38
-langsmith==0.1.147
+# ML & Vision (Optimized for fast Railway builds)
+torch
+torchvision
+ultralytics
+opencv-python-headless
+
+# LLM & RAG (Floating versions to prevent resolution errors)
+openai
+langchain
+langchain-openai
+langchain-community
+langchain-core
+langgraph
+tiktoken
+chromadb
 
 # Vector Search
-faiss-cpu==1.7.4
-rank-bm25==0.2.2
+faiss-cpu
+rank-bm25
 
-# PDF Generation
-reportlab==4.1.0
-pillow==10.2.0
-
-# Data Processing
-pandas==2.2.0
-numpy==1.26.4
-scipy==1.15.3
-matplotlib==3.10.8
-seaborn==0.13.2
-tqdm==4.67.1
+# PDF Generation & Data
+PyPDF2
+reportlab
+pillow
+pandas
+numpy
 
 # Utilities
-python-dotenv==1.0.1
-requests==2.31.0
-pydantic==2.6.1
-
-# Dependencies for FastAPI
-starlette<0.37.0,>=0.36.3
-typing-extensions>=4.8.0
-h11>=0.8
-click>=7.0
-websockets>=10.4
-httptools>=0.5.0
-uvloop!=0.15.0,!=0.15.1,>=0.14.0
-pyyaml>=6.0.3
-watchfiles>=1.1.1
+python-dotenv
+requests
+pydantic
