@@ -1,0 +1,33 @@
+# Web Framework
+fastapi==0.109.2
+uvicorn[standard]==0.27.1
+python-multipart==0.0.9
+
+# ML & Vision
+ultralytics==8.1.24
+torch==2.2.0
+torchvision==0.17.0
+
+# LLM & RAG
+openai==1.12.0
+langchain==0.1.9
+langchain-openai==0.0.6
+langchain-core==0.1.23
+langgraph==0.0.25
+
+# Vector Search
+faiss-cpu==1.7.4
+rank-bm25==0.2.2
+
+# PDF Generation
+reportlab==4.1.0
+pillow==10.2.0
+
+# Data Processing
+pandas==2.2.0
+numpy==1.26.4
+
+# Utilities
+python-dotenv==1.0.1
+requests==2.31.0
+pydantic==2.6.1
