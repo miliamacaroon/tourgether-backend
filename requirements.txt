@@ -1,16 +1,15 @@
 # Web Framework
 fastapi
-uvicorn==0.27.0
+uvicorn[standard]
 python-multipart
 
-# ML & Vision (CPU-only)
+# ML & Vision (CPU-ONLY)
 --extra-index-url https://download.pytorch.org/whl/cpu
-torch
-torchvision
+torch==2.2.1+cpu
+torchvision==0.17.1+cpu
 ultralytics
 opencv-python-headless
 
-# LLM & RAG
 openai
 langchain
 langchain-openai
